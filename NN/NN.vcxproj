@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7AE236FD-6342-47D5-8AAD-8EA0D6031A71}</ProjectGuid>
+    <RootNamespace>NN</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <CudaToolkitCustomDir>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2</CudaToolkitCustomDir>
+    <ProjectName>NN</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.2.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath); $(ProjectPath);</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <CudaRuntime>Static</CudaRuntime>
+      <AdditionalCompilerOptions>--extended-lambda</AdditionalCompilerOptions>
+      <AdditionalOptions>--extended-lambda -std=c++20 -Xcompiler "/std:c++20" --expt-relaxed-constexpr %(AdditionalOptions)</AdditionalOptions>
+      <Include>
+      </Include>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+    </CudaCompile>
+    <CudaLink />
+    <CudaLink>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </CudaLink>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <AdditionalOptions>--extended-lambda -std=c++20 -Xcompiler "/std:c++20"  --expt-relaxed-constexpr %(AdditionalOptions)</AdditionalOptions>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CudaCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="asserts\activation_function_asserts.h" />
+    <ClInclude Include="asserts\assert_t.h" />
+    <ClInclude Include="asserts\bulk_assert_t.h" />
+    <ClInclude Include="asserts\dimensions.h" />
+    <ClInclude Include="asserts\false_assert.h" />
+    <ClInclude Include="asserts\includes.h" />
+    <ClInclude Include="asserts\layer_asserts.h" />
+    <ClInclude Include="asserts\map_function_asserts.h" />
+    <ClInclude Include="asserts\sequence_asserts.h" />
+    <ClInclude Include="asserts\string_asserts.h" />
+    <ClInclude Include="asserts\type_asserts.h" />
+    <ClInclude Include="concepts\is_string_collection.h" />
+    <ClInclude Include="concepts\is_string_t_concept.h" />
+    <ClInclude Include="cuda_helpers\kernel_launch.h" />
+    <ClInclude Include="cuda_helpers\rand.h" />
+    <ClInclude Include="cuda_helpers\rand_kernels.cuh" />
+    <ClInclude Include="cuda_helpers\set_device.h" />
+    <ClInclude Include="datasets\interface\application.h" />
+    <ClInclude Include="datasets\mnist\mnist.h" />
+    <ClInclude Include="datasets\tests\test_applications.h" />
+    <ClInclude Include="devices\cpu_concept.h" />
+    <ClInclude Include="devices\cuda_base.h" />
+    <ClInclude Include="devices\gpu_base.h" />
+    <ClInclude Include="devices\cuda_concept.h" />
+    <ClInclude Include="dtypes\as_dtype.h" />
+    <ClInclude Include="dtypes\concept.h" />
+    <ClInclude Include="dtypes\includes.h" />
+    <ClInclude Include="dtypes\scaled_integral_dtype.h" />
+    <ClInclude Include="dtypes\signed_integral_dtype.h" />
+    <ClInclude Include="dtypes\scaled_with_offset_integral_dtype.h" />
+    <ClInclude Include="dtypes\unsigned_integral_dtype.h" />
+    <ClInclude Include="exports\includes.h" />
+    <ClInclude Include="functions\activation_functions\activation_macro.h" />
+    <ClInclude Include="functions\activation_functions\identity_activation.h" />
+    <ClInclude Include="functions\activation_functions\leaky_relu_activation.h" />
+    <ClInclude Include="functions\activation_functions\logistic_activation.h" />
+    <ClInclude Include="functions\activation_functions\relu_activation.h" />
+    <ClInclude Include="functions\error_measures\cross_entropy_error.h" />
+    <ClInclude Include="functions\error_measures\halved_squared_error.h" />
+    <ClInclude Include="functions\error_measures\squared_error.h" />
+    <ClInclude Include="functions\invertible_linear_transformations\concept.h" />
+    <ClInclude Include="functions\invertible_linear_transformations\scale.h" />
+    <ClInclude Include="functions\map_functions\mappable.h" />
+    <ClInclude Include="functions\map_functions\scale.h" />
+    <ClInclude Include="functions\map_functions\scale_over.h" />
+    <ClInclude Include="functions\reducers\dot_product.h" />
+    <ClInclude Include="functions\reducers\summation.h" />
+    <ClInclude Include="functions\weight_modifiers\clamped_offset_modifier.h" />
+    <ClInclude Include="functions\weight_modifiers\decay_clamped_linear_modifier.h" />
+    <ClInclude Include="functions\weight_modifiers\clamped_linear_modifier.h" />
+    <ClInclude Include="functions\weight_modifiers\clamped_logistic_modifier.h" />
+    <ClInclude Include="functions\weight_modifiers\linear_modifier.h" />
+    <ClInclude Include="functions\weight_modifiers\logistic_modifier.h" />
+    <ClInclude Include="functions\weight_modifiers\no_modification.h" />
+    <ClInclude Include="functions\weight_modifiers\weight_modifier_concept.h" />
+    <ClInclude Include="helpers\array_to_string.h" />
+    <ClInclude Include="helpers\compiler_operations\append.h" />
+    <ClInclude Include="helpers\compiler_operations\static_literal_to_string_t.h" />
+    <ClInclude Include="helpers\fixed_string.h" />
+    <ClInclude Include="helpers\endian.h" />
+    <ClInclude Include="helpers\index_pack.h" />
+    <ClInclude Include="helpers\string_collection.h" />
+    <ClInclude Include="helpers\string_literal.h" />
+    <ClInclude Include="concepts\layer_trait_concept.h" />
+    <ClInclude Include="helpers\tuple.h" />
+    <ClInclude Include="kernels\activation.cuh" />
+    <ClInclude Include="kernels\cast.cuh" />
+    <ClInclude Include="kernels\convoloution.cuh" />
+    <ClInclude Include="kernels\copy.cuh" />
+    <ClInclude Include="kernels\copy_expansion.cuh" />
+    <ClInclude Include="kernels\elemental_reducer.cuh" />
+    <ClInclude Include="kernels\map.cuh" />
+    <ClInclude Include="kernels\overlay.cuh" />
+    <ClInclude Include="kernels\initialization.cuh" />
+    <ClInclude Include="kernels\softmax.cuh" />
+    <ClInclude Include="layers\abstract\unweighted.h" />
+    <ClInclude Include="layers\conv\biased_conv.h" />
+    <ClInclude Include="layers\conv\biased_conv_impl.h" />
+    <ClInclude Include="layers\conv\conv.h" />
+    <ClInclude Include="layers\interfaces\forward_declarations.h" />
+    <ClInclude Include="layers\interfaces\immaterial_layer.h" />
+    <ClInclude Include="layers\interfaces\i_layer.h" />
+    <ClInclude Include="layers\linear\biased_linear.h" />
+    <ClInclude Include="layers\operations\display.h" />
+    <ClInclude Include="layers\overlay\biased_overlay.h" />
+    <ClInclude Include="layers\overlay\biased_overlay_impl.h" />
+    <ClInclude Include="layers\overlay\overlay.h" />
+    <ClInclude Include="sequences\concurancy\concurrent_sequence.h" />
+    <ClInclude Include="layers\phantom_layers\activation_function.h" />
+    <ClInclude Include="layers\phantom_layers\error_preprocessor.h" />
+    <ClInclude Include="layers\phantom_layers\name_appender.h" />
+    <ClInclude Include="layers\phantom_layers\name_prepender.h" />
+    <ClInclude Include="layers\phantom_layers\name_replacer.h" />
+    <ClInclude Include="layers\phantom_layers\tracer.h" />
+    <ClInclude Include="layers\softmax\softmax.h" />
+    <ClInclude Include="layers\type_transformations\type_cast.h" />
+    <ClInclude Include="network\network.h" />
+    <ClInclude Include="references\immutable_shaped_device_reference.h" />
+    <ClInclude Include="references\mutable_shaped_device_reference.h" />
+    <ClInclude Include="samples\mnist.h" />
+    <ClInclude Include="sequences\compiler_operations\assert_sequence.h" />
+    <ClInclude Include="sequences\numbered_sequence.h" />
+    <ClInclude Include="sequences\subsequence.h" />
+    <ClInclude Include="shapes\compiler_operations\max_dimension.h" />
+    <ClInclude Include="shapes\compiler_operations\pad_shape.h" />
+    <ClInclude Include="shapes\shape_sequence.h" />
+    <ClInclude Include="storage\weight_store.h" />
+    <ClInclude Include="threads\immutable_weight_lock.h" />
+    <ClInclude Include="threads\mutable_weight_lock.h" />
+    <ClInclude Include="traits\layer_traits.h" />
+    <ClInclude Include="traits\layer_traits_forward_declaration.h" />
+    <ClInclude Include="traits\network_traits.h" />
+    <ClInclude Include="traits\sequence_traits.h" />
+    <ClInclude Include="traits\trait_get.h" />
+    <ClInclude Include="network\launch_parameters\includes.h" />
+    <ClInclude Include="network\launch_parameters\test_launch_parameters.h" />
+    <ClInclude Include="network\launch_parameters\training_launch_parameters.h" />
+    <ClInclude Include="shapes\compiler_operations\shape_to_string_t.h" />
+    <ClInclude Include="helpers\compiler_operations\value_to_string_t.h" />
+    <ClInclude Include="helpers\string_t.h" />
+    <ClInclude Include="helpers\string_t_forward_declaration.h" />
+    <ClInclude Include="concepts\layer_concept.h" />
+    <ClInclude Include="layers\device_transformations\device_change.h" />
+    <ClInclude Include="sequences\compiler_operations\duplicate.h" />
+    <ClInclude Include="sequences\compiler_operations\get_last.h" />
+    <ClInclude Include="sequences\forward_declaration.h" />
+    <ClInclude Include="sequences\sequence.h" />
+    <ClInclude Include="devices\cpu.h" />
+    <ClInclude Include="devices\device.h" />
+    <ClInclude Include="devices\cuda.h" />
+    <ClInclude Include="devices\includes.h" />
+    <ClInclude Include="references\immutable_reference.h" />
+    <ClInclude Include="references\includes.h" />
+    <ClInclude Include="references\mutable_reference.h" />
+    <ClInclude Include="memory\storage\unsafe\temporary_stores\thread_mutable.h" />
+    <ClInclude Include="shapes\empty_shape.h" />
+    <ClInclude Include="shapes\forward_declaration.h" />
+    <ClInclude Include="shapes\compiler_operations\add.h" />
+    <ClInclude Include="shapes\compiler_operations\append.h" />
+    <ClInclude Include="shapes\compiler_operations\expand.h" />
+    <ClInclude Include="shapes\compiler_operations\fill.h" />
+    <ClInclude Include="shapes\compiler_operations\flatten.h" />
+    <ClInclude Include="shapes\compiler_operations\reduce.h" />
+    <ClInclude Include="shapes\compiler_operations\reverse.h" />
+    <ClInclude Include="shapes\compiler_operations\shape_to_partial_factor_shape.h" />
+    <ClInclude Include="shapes\compiler_operations\subtract.h" />
+    <ClInclude Include="shapes\compiler_operations\transpose.h" />
+    <ClInclude Include="shapes\compiler_operations\unflatten.h" />
+    <ClInclude Include="shapes\compiler_operations\volume.h" />
+    <ClInclude Include="shapes\includes.h" />
+    <ClInclude Include="shapes\compiler_operations\partial_factor_shape.h" />
+    <ClInclude Include="shapes\operation_aliases.h" />
+    <ClInclude Include="shapes\runtime_operations\flatten.h" />
+    <ClInclude Include="shapes\runtime_operations\unflatten.h" />
+    <ClInclude Include="shapes\runtime_shape.h" />
+    <ClInclude Include="shapes\shape.h" />
+    <ClInclude Include="shapes\shape_concept.h" />
+    <ClInclude Include="storage\forward_declarations.h" />
+    <ClInclude Include="storage\network_io\test_store.h" />
+    <ClInclude Include="storage\store.h" />
+    <ClInclude Include="storage\training_output_store.h" />
+    <ClInclude Include="storage\training_store.h" />
+    <ClInclude Include="storage\unsafe\forward_declaration.h" />
+    <ClInclude Include="storage\unsafe\includes.h" />
+    <ClInclude Include="storage\unsafe\unsafe_device_store_cpu.h" />
+    <ClInclude Include="storage\unsafe\unsafe_device_store_cuda.h" />
+    <ClInclude Include="threads\thread_context.h" />
+    <ClInclude Include="datasets\interface\dataset.h" />
+    <ClInclude Include="tensors\tensors.h">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="network\launch_parameters\network_launch_parameters.h" />
+    <ClInclude Include="layers\abstract\layer_box.h">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="network\wrapper\network_wrapper.h" />
+    <ClInclude Include="datasets\tests\test_datasets.h" />
+    <ClInclude Include="functions\weight_modifiers\weight_changes.cuh" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NN.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="MNIST_LOCATIONS.hide" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.2.targets" />
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
+</Project>
