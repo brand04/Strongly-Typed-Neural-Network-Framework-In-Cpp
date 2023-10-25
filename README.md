@@ -1,7 +1,7 @@
 <h1>A strongly typed framework for creating neural networks</h1>
 <br>
-<p>This is technically my first c++ project, but I did rewrite parts of it many times as I learned more about the language and found better ways of writing things. This does mean that the design of this project was heavily influenced by which areas I was looking to explose and learn more about, resulting in 
-the features such as compile-time string concatenation (Which I believe may come in useful later in layer constructions where the inputs are not just input/output tensors), heavy use of template metaprogramming and some curiously recursive template patterns to name a few.</p>
+<p>This is technically my first c++ project, but I did rewrite parts of it many times as I learned more about the language and found better ways of writing things. This does mean that the design of this project was heavily influenced by which areas I was looking to explore and learn more about, resulting in 
+features such as compile-time string concatenation (Which I believe may come in useful later in layer constructions where the inputs are not just input/output tensors), heavy use of template metaprogramming and some curiously recursive template patterns to name a few.</p>
 
 <br>
 <p>The main.cpp file contains an example use on the MNIST dataset (which this framework can get 95%+ on currently)</p>
