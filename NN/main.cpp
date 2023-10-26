@@ -57,7 +57,7 @@ int main()
     NN::Datasets::MNIST<double> testDataset(MNIST_TEST_LABELS_PATH, MNIST_TEST_PIXELS_PATH);
 
     //create training parameters (batches to train for, passes per batches)
-    typename Network::TrainingParameters trainingParams(1000000, 1250);
+    typename Network::TrainingParameters trainingParams(TRAINING_BATCHES, TRAINING_BATCH_SIZE);
     trainingParams.setAverageLifetime(200).setSavePeriod(50, "./models/MNIST-S.nn", false).setStoppingThreshold(0.005).setLossReportPeriod(1).setInsuranceThreshold(0.4).setLossResetThreshold(1000.0).setWeightDisplayPeriod(0).enableDecayingAverage(true); //configure options
 
     const int testSize = 10000;
@@ -66,7 +66,7 @@ int main()
     
     network.test(testParams, &testDataset);
     if constexpr (RESULTS_TO_DISPLAY > 0) {
-        std::cout << testParams.displayResults(50);
+        std::cout << testParams.displayResults(RESULTS_TO_DISPLAY);
     }
     
    
