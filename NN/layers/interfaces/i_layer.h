@@ -46,8 +46,7 @@ namespace NN {
 				//define a default pattern for construction of fullname from a LayerT::name and traits
 
 
-
-
+				
 				template<typename LayerT, typename prepend = StringT<>, typename prepender = StringT<'\t'>> //default to no prepend value
 				static constexpr const StringCollection fullname = StringCollection(prepend::string , LayerT::name, " (" , Traits::getLayerTraits<LayerT>::InputShape::string , " [ " , InputDevice::string , " ] -> ", Traits::getLayerTraits<LayerT>::OutputShape::string , " [ " , OutputDevice::string , " ] )");
 
@@ -90,6 +89,9 @@ namespace NN {
 				*/
 
 				//use static templated functions rather than member functions so that the correct threadForward is run, as these are overriden but not virtual
+				//Allows static polymorphism without relying on devirtualization
+				//Use =delete just so if unimplemented the error is more readable 
+				//TODO: find alternatives
 
 				template<typename LayerT>
 				static void forward(LayerT& layer, Threads::ThreadContext& ctx) = delete; //requires implementation of forward
